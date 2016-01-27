@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "generator_servo", "generator_servo\generator_servo.vfproj", "{C3DAC6E4-340E-4105-9CC3-D1560C1EDDD8}"
 EndProject
-Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "pitch_servo_with_limits", "pitch_servo_with_limits\pitch_servo_with_limits.vfproj", "{04D055F8-8BC8-47A6-97AA-760DA795CA48}"
-EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "filters", "filters\filters.vfproj", "{30886AB4-1D75-48F2-A038-46C8933F14CF}"
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "flap_servo", "flap_servo\flap_servo.vfproj", "{2B49610B-3DFE-4E2A-8DCD-27F255A5FD16}"
@@ -12,6 +10,8 @@ EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "mech_brake", "mech_brake\mech_brake.vfproj", "{691321B2-5339-4FBB-9C5F-FBD5A4A3B790}"
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "pass_stop", "pass_stop\pass_stop.vfproj", "{EBE3B950-F985-4357-9B90-3BB7228CE84A}"
+EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "servo_with_limits", "servo_with_limits\servo_with_limits.vfproj", "{04D055F8-8BC8-47A6-97AA-760DA795CA48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{C3DAC6E4-340E-4105-9CC3-D1560C1EDDD8}.Debug|Win32.Build.0 = Debug|Win32
 		{C3DAC6E4-340E-4105-9CC3-D1560C1EDDD8}.Release|Win32.ActiveCfg = Release|Win32
 		{C3DAC6E4-340E-4105-9CC3-D1560C1EDDD8}.Release|Win32.Build.0 = Release|Win32
-		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.ActiveCfg = Debug|Win32
-		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.Build.0 = Debug|Win32
-		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.ActiveCfg = Release|Win32
-		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.Build.0 = Release|Win32
 		{30886AB4-1D75-48F2-A038-46C8933F14CF}.Debug|Win32.ActiveCfg = Debug|Win32
 		{30886AB4-1D75-48F2-A038-46C8933F14CF}.Debug|Win32.Build.0 = Debug|Win32
 		{30886AB4-1D75-48F2-A038-46C8933F14CF}.Release|Win32.ActiveCfg = Release|Win32
@@ -43,6 +39,10 @@ Global
 		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Debug|Win32.Build.0 = Debug|Win32
 		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Release|Win32.ActiveCfg = Release|Win32
 		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Release|Win32.Build.0 = Release|Win32
+		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.ActiveCfg = Debug|Win32
+		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.Build.0 = Debug|Win32
+		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.ActiveCfg = Release|Win32
+		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

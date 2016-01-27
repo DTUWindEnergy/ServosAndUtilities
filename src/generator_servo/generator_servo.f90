@@ -23,21 +23,20 @@ module generator_servo_mod
       !
       write(6, *) 'Gen. torque Servo ' //trim(adjustl(vertext32))// ' loaded...'
       ! Save parameters
-      lowpass2ordergen%f0=array1(1)*2.0_mk*pi
-      lowpass2ordergen%zeta=array1(2)
-      generatorvar%max_lss_torque=array1(3)
-      generatorvar%n_eta=1
+      lowpass2ordergen%f0 = array1(1)*2.0_mk*pi
+      lowpass2ordergen%zeta = array1(2)
+      generatorvar%max_lss_torque = array1(3)
+      generatorvar%n_eta = 1
       allocate(generatorvar%p_eta(1))
-      generatorvar%p_eta=array1(4)
-      generatorvar%nom_eta_x=1.0_mk
-      generatorvar%gearratio=array1(5)
-      TimeGridLoss=array1(7)
+      generatorvar%p_eta = array1(4)
+      generatorvar%nom_eta_x = 1.0_mk
+      generatorvar%gearratio = array1(5)
+      TimeGridLoss = array1(7)
       ! Initiate the dynamic variables
-      generatorvar%stepno=0
-      generatorvar%time_old=0.0_mk
+      generatorvar%stepno = 0
+      generatorvar%time_old = 0.0_mk
       ! Zero output
-      array2=0.0_mk
-      return
+      array2 = 0.0_mk
    end subroutine init_generator_servo
 !**************************************************************************************************
    subroutine init_generator_servo_var_eta(array1,array2)
@@ -45,7 +44,7 @@ module generator_servo_mod
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo_var_eta'::init_generator_servo_var_eta
       !DEC$ END IF
-      real*8 array1(1000),array2(1)
+      real*8 array1(1000), array2(1)
       !
       ! Input array1 must contain
       !
@@ -86,15 +85,15 @@ module generator_servo_mod
             generatorvar%p_eta(1) = y_eta(1)
          case (2)
             generatorvar%p_eta(1) = y_eta(1)
-            generatorvar%p_eta(2) = y_eta(2)-y_eta(1)
+            generatorvar%p_eta(2) = y_eta(2) - y_eta(1)
          case (3)
             generatorvar%p_eta(1) = y_eta(1)
-            generatorvar%p_eta(3) = (y_eta(3)-2*y_eta(2)+y_eta(1))*2.0_mk
-            generatorvar%p_eta(2) = (y_eta(2)-generatorvar%p_eta(3)/4.0_mk-y_eta(1))*2.0_mk
+            generatorvar%p_eta(3) = (y_eta(3) - 2.0_mk*y_eta(2) + y_eta(1))*2.0_mk
+            generatorvar%p_eta(2) = (y_eta(2) - generatorvar%p_eta(3)/4.0_mk - y_eta(1))*2.0_mk
          case (4)
             generatorvar%p_eta(1) = y_eta(1)
-            generatorvar%p_eta(3) = y_eta(3)-y_eta(1)
-            generatorvar%p_eta(2) = 1/sqrt(0.5_mk)*atanh((y_eta(2)-y_eta(1))/generatorvar%p_eta(3))
+            generatorvar%p_eta(3) = y_eta(3) - y_eta(1)
+            generatorvar%p_eta(2) = 1.0_mk/sqrt(0.5_mk)*atanh((y_eta(2) - y_eta(1))/generatorvar%p_eta(3))
          case default
             write (0,*) 'Error: n_eta should be between 1,2 or 3'
       end select
@@ -106,7 +105,7 @@ module generator_servo_mod
       return
    end subroutine init_generator_servo_var_eta
 !**************************************************************************************************
-   subroutine update_generator_servo(array1,array2)
+   subroutine update_generator_servo(array1, array2)
       implicit none
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_generator_servo'::update_generator_servo
@@ -131,26 +130,26 @@ module generator_servo_mod
       !    8: Grid flag [1=no grid,0=grid]
       !
       ! Local vars
-      real(mk) time,omegagen,Qgref,mech_Qgref,mech_Qg,Qg,softstart_torque
+      real(mk) time, omegagen, Qgref, mech_Qgref, mech_Qg, Qg, softstart_torque
       real(mk) Qshaft
       real(mk) Qgdummy(2)
       integer i
       real(mk) eta_x
       ! New step?
-      time=array1(1)
-      if (time.gt.generatorvar%time_old) then
-         generatorvar%deltat=time-generatorvar%time_old
-         generatorvar%time_old=time
-         generatorvar%stepno=generatorvar%stepno+1
+      time = array1(1)
+      if (time .gt. generatorvar%time_old) then
+         generatorvar%deltat = time - generatorvar%time_old
+         generatorvar%time_old = time
+         generatorvar%stepno = generatorvar%stepno + 1
       endif
       ! Save input
       Qgref = array1(2)
       Qshaft = array1(4)
       omegagen = array1(3)
       ! Reference mech. torque
-      mech_Qgref = min(Qgref/generatorvar%eta,generatorvar%max_lss_torque)
+      mech_Qgref = min(Qgref/generatorvar%eta, generatorvar%max_lss_torque)
       ! Low-pass filter generator speed (LSS)
-      Qgdummy = lowpass2orderfilt(generatorvar%deltat,generatorvar%stepno,lowpass2ordergen,mech_Qgref);
+      Qgdummy = lowpass2orderfilt(generatorvar%deltat, generatorvar%stepno, lowpass2ordergen, mech_Qgref)
       mech_Qg = Qgdummy(1)
       ! Loss
       select case (generatorvar%eta_dependance)
@@ -162,7 +161,7 @@ module generator_servo_mod
             eta_x = mech_Qg*omegagen
       end select
     
-      eta_x = max(min(eta_x/generatorvar%nom_eta_x,1.0_mk),0.0_mk)
+      eta_x = max(min(eta_x/generatorvar%nom_eta_x, 1.0_mk), 0.0_mk)
     
       select case(generatorvar%n_eta)
          case (1)
@@ -172,11 +171,11 @@ module generator_servo_mod
          case (3)
             generatorvar%eta = generatorvar%p_eta(3)*eta_x**2 + generatorvar%p_eta(2)*eta_x + generatorvar%p_eta(1)
          case (4)
-            generatorvar%eta = generatorvar%p_eta(3)*tanh(sqrt(eta_x)*generatorvar%p_eta(2))+generatorvar%p_eta(1)
+            generatorvar%eta = generatorvar%p_eta(3)*tanh(sqrt(eta_x)*generatorvar%p_eta(2)) + generatorvar%p_eta(1)
       end select
     ! Output
       if ((time.gt.TimeGridLoss).and.(TimeGridLoss.gt.0.d0)) then
-         array2=0.d0
+         array2 = 0.d0
          array2(8) = 1.d0
       else
          array2(1) = -mech_Qg
