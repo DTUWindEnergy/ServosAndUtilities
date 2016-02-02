@@ -9,8 +9,6 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "flap_servo", "flap_servo\fl
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "mech_brake", "mech_brake\mech_brake.vfproj", "{691321B2-5339-4FBB-9C5F-FBD5A4A3B790}"
 EndProject
-Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "pass_stop", "pass_stop\pass_stop.vfproj", "{EBE3B950-F985-4357-9B90-3BB7228CE84A}"
-EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "servo_with_limits", "servo_with_limits\servo_with_limits.vfproj", "{04D055F8-8BC8-47A6-97AA-760DA795CA48}"
 EndProject
 Global
@@ -35,10 +33,6 @@ Global
 		{691321B2-5339-4FBB-9C5F-FBD5A4A3B790}.Debug|Win32.Build.0 = Debug|Win32
 		{691321B2-5339-4FBB-9C5F-FBD5A4A3B790}.Release|Win32.ActiveCfg = Release|Win32
 		{691321B2-5339-4FBB-9C5F-FBD5A4A3B790}.Release|Win32.Build.0 = Release|Win32
-		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Debug|Win32.Build.0 = Debug|Win32
-		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Release|Win32.ActiveCfg = Release|Win32
-		{EBE3B950-F985-4357-9B90-3BB7228CE84A}.Release|Win32.Build.0 = Release|Win32
 		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.ActiveCfg = Debug|Win32
 		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.Build.0 = Debug|Win32
 		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.ActiveCfg = Release|Win32
