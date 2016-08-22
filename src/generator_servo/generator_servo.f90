@@ -8,7 +8,7 @@ module generator_servo_mod
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo'::init_generator_servo
       !DEC$ END IF
-        real(mk) array1(1000), array2(1)
+        real(mk) array1(100), array2(1)
       ! Input array1 must contain
       !
       !    1: constant 1 ; Frequency of 2nd order servo model of generator-converter system [Hz]
@@ -44,7 +44,7 @@ module generator_servo_mod
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo_var_eta'::init_generator_servo_var_eta
       !DEC$ END IF
-      real*8 array1(1000), array2(1)
+      real*8 array1(100), array2(1)
       !
       ! Input array1 must contain
       !
@@ -110,7 +110,7 @@ module generator_servo_mod
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_generator_servo'::update_generator_servo
       !DEC$ END IF
-        real*8 array1(1000), array2(100)
+        real*8 array1(100), array2(100)
       ! Input array1 must contain
       !
       !    1: general time                           ; Time [s]     
