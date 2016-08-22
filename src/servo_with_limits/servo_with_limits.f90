@@ -4,7 +4,7 @@
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_servo_with_limits'::init_servo_with_limits
 !DEC$ END IF
-  real*8 array1(10),array2(1)
+  real*8 array1(100),array2(1)
 ! Input array1 must contain
 !
 !    1: Number of blades [-]
@@ -49,7 +49,7 @@
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_servo_with_limits'::update_servo_with_limits
 !DEC$ END IF
-  real*8 array1(5),array2(9)
+  real*8 array1(100),array2(100)
 ! Input array1 must contain
 !
 !    1: Time                                  [s]
