@@ -4,7 +4,7 @@
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_mech_brake'::init_mech_brake
 !DEC$ END IF
-  real*8 array1(1000),array2(1)
+  real*8 array1(100),array2(1)
 ! Input array1 must contain
 !
 !    1: constant 1 ; Fully deployed maximum brake torque [Nm]
@@ -32,7 +32,7 @@
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_mech_brake'::update_mech_brake
 !DEC$ END IF
-  real*8 array1(1000),array2(100)
+  real*8 array1(100),array2(100)
 ! Input array1 must contain
 !
 !    1: general time                           ; Time [s]
