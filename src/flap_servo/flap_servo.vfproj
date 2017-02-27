@@ -28,5 +28,6 @@
 		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
 		<File RelativePath=".\flap_servo.f90"/>
-		<File RelativePath="..\..\..\BasicDTUController\src\dtu_we_controller\misc_mod.f90"/></Filter></Files>
+		<File RelativePath="..\misc_mod.f90"/>
+		<File RelativePath="..\write_version.f90"/></Filter></Files>
 	<Globals/></VisualStudioProject>

@@ -11,6 +11,8 @@ Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "mech_brake", "mech_brake\me
 EndProject
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "servo_with_limits", "servo_with_limits\servo_with_limits.vfproj", "{04D055F8-8BC8-47A6-97AA-760DA795CA48}"
 EndProject
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "VersionScript", "VersionScript\VersionScript.vfproj", "{4D72FEF1-B2BF-499C-A15C-471AE19C2415}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -37,6 +39,10 @@ Global
 		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Debug|Win32.Build.0 = Debug|Win32
 		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.ActiveCfg = Release|Win32
 		{04D055F8-8BC8-47A6-97AA-760DA795CA48}.Release|Win32.Build.0 = Release|Win32
+		{4D72FEF1-B2BF-499C-A15C-471AE19C2415}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D72FEF1-B2BF-499C-A15C-471AE19C2415}.Debug|Win32.Build.0 = Debug|Win32
+		{4D72FEF1-B2BF-499C-A15C-471AE19C2415}.Release|Win32.ActiveCfg = Release|Win32
+		{4D72FEF1-B2BF-499C-A15C-471AE19C2415}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

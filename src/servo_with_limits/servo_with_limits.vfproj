@@ -10,7 +10,7 @@
 				<Tool Name="VFMidlTool" PreprocessorDefinitions="NDEBUG" MkTypLibCompatible="true" SuppressStartupBanner="true" HeaderFileName="" DLLDataFileName="" TypeLibraryName="$(OUTDIR)/servo_with_limits.tlb"/>
 				<Tool Name="VFCustomBuildTool"/>
 				<Tool Name="VFPreLinkEventTool"/>
-				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPreBuildEventTool" CommandLine="call $(SolutionDir)get_git_version.bat" Description="Extracting version info from git repository"/>
 				<Tool Name="VFPostBuildEventTool"/>
 				<Tool Name="VFManifestTool" SuppressStartupBanner="true" ResourceFile="$(IntDir).embed.manifest.res"/></Configuration>
 		<Configuration Name="Debug|Win32" OutputDirectory="..\$(ConfigurationName)" IntermediateDirectory="..\$(ConfigurationName)" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" ConfigurationType="typeDynamicLibrary">
@@ -27,8 +27,9 @@
 		<Filter Name="Header Files" Filter="h;hpp;hxx;hm;inl;fi;fd"/>
 		<Filter Name="Resource Files" Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<Filter Name="Source Files" Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;f90;for;f;fpp">
-		<File RelativePath="..\..\..\BasicDTUController\src\dtu_we_controller\misc_mod.f90"/>
+		<File RelativePath="..\misc_mod.f90"/>
 		<File RelativePath=".\rk45.for"/>
 		<File RelativePath=".\servo_with_limits.f90"/>
-		<File RelativePath=".\servo_with_limits_data.f90"/></Filter></Files>
+		<File RelativePath=".\servo_with_limits_data.f90"/>
+		<File RelativePath="..\write_version.f90"/></Filter></Files>
 	<Globals/></VisualStudioProject>

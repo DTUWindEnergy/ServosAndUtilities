@@ -1,9 +1,9 @@
 module generator_servo_mod
    use generator_servo_fcns
-   implicit none
    contains
 !**************************************************************************************************
    subroutine init_generator_servo(array1,array2)
+      use write_version_mod
       implicit none
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo'::init_generator_servo
@@ -21,7 +21,8 @@ module generator_servo_mod
       !
       ! Output array2 contains nothing
       !
-      write(6, *) 'Gen. torque Servo ' //trim(adjustl(vertext32))// ' loaded...'
+      call write_textversion
+      write(6, *) 'Gen. torque Servo ' //trim(adjustl(TextVersion))// ' loaded...'
       ! Save parameters
       lowpass2ordergen%f0 = array1(1)*2.0_mk*pi
       lowpass2ordergen%zeta = array1(2)

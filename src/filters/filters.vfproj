@@ -29,5 +29,6 @@
 		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
 		<File RelativePath=".\filters.f90"/>
 		<File RelativePath=".\filters_data.f90"/>
-		<File RelativePath="..\..\..\BasicDTUController\src\dtu_we_controller\misc_mod.f90"/></Filter></Files>
+		<File RelativePath="..\misc_mod.f90"/>
+		<File RelativePath="..\write_version.f90"/></Filter></Files>
 	<Globals/></VisualStudioProject>
