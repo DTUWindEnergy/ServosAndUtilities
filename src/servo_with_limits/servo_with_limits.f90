@@ -33,7 +33,12 @@
   theta_max=array1(7)*pi/180.d0
   time_runaway=array1(8)
   time_stuck=array1(9)
-  stuck_angle=array1(10)*pi/180.d0
+  if (abs(array1(10)).lt.90.d0) then 
+    stuck_type=0
+    stuck_angle=array1(10)*pi/180.d0
+  else
+    stuck_type=1
+  endif
 ! Set initial conditions 
   ynew(1,1:nblades)=0.d0
   ynew(2,1:nblades)=0.d0
@@ -104,6 +109,9 @@
 !     Compute pitch angle and velocity at next step 
       tend=timestep
       if ((array1(1).gt.time_stuck).and.(time_stuck.gt.0.d0).and.(array1(5).lt.1.d0).and.(i.eq.1)) then
+        if (stuck_type.eq.1) then
+          stuck_angle=yold(1,1)
+        endif
         y(1)=stuck_angle
         y(2)=0.d0
       elseif ((array1(1).gt.time_runaway).and.(time_runaway.gt.0.d0).and.(array1(5).lt.1.d0)) then
