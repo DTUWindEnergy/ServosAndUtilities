@@ -36,6 +36,7 @@ module generator_servo_mod
       ! Initiate the dynamic variables
       generatorvar%stepno = 0
       generatorvar%time_old = 0.0_mk
+      generatorvar%eta = 1.0_mk
       ! Zero output
       array2 = 0.0_mk
    end subroutine init_generator_servo
