@@ -226,10 +226,10 @@ function timedelay(dt, stepno, filt, Td, x)
    if (stepno .gt. filt%stepno1) then
       filt%xz_old = filt%xz
    endif
-       do k = 40, 2, -1
-          filt%xz(k) = filt%xz_old(k - 1)
-       end do
-       filt%xz(1) = x
+   do k = 40, 2, -1
+      filt%xz(k) = filt%xz_old(k - 1)
+   end do
+   filt%xz(1) = x
    ! Output
    if (Td .eq. 0.0_mk) then
       timedelay = x
