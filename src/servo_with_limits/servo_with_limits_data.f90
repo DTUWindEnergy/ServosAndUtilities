@@ -4,4 +4,5 @@ module servo_with_limits_data
    real(mk) omega0,beta0,vmax,amax,theta_min,theta_max,time_runaway,time_stuck,stuck_angle
    real(mk) oldtime,theta_ref,yold(2,3),ynew(2,3)
    real(mk) oldarray2(100)
+   real(mk) timestep
 end module servo_with_limits_data
