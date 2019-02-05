@@ -1,6 +1,8 @@
-  subroutine init_mech_brake(array1,array2)
+  subroutine init_mech_brake(array1,array2) bind(c,name="init_mech_brake")
   use mech_brake_fcns
+  !DEC$ IF .NOT. DEFINED(__LINUX__)
   use write_version_mod
+  !DEC$ END IF
   implicit none
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_mech_brake'::init_mech_brake
@@ -15,8 +17,10 @@
 !
 ! Output array2 contains nothing
 !
+  !DEC$ IF .NOT. DEFINED(__LINUX__)
   call write_textversion
   write(6,*) 'Mech brake ' //trim(adjustl(TextVersion))// ' loaded...'
+  !DEC$ END IF
 ! Save parameters
   Qmax     = array1(1)
   alpha    = array1(2)
@@ -28,7 +32,7 @@
   return
   end subroutine init_mech_brake
 !***********************************************************************
-  subroutine update_mech_brake(array1,array2)
+  subroutine update_mech_brake(array1,array2) bind(c,name="update_mech_brake")
   use mech_brake_fcns
 !  use imsl
   implicit none

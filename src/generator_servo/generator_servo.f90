@@ -1,9 +1,12 @@
 module generator_servo_mod
    use generator_servo_fcns
+   implicit none
    contains
 !**************************************************************************************************
-   subroutine init_generator_servo(array1,array2)
+   subroutine init_generator_servo(array1,array2) bind(c,name="init_generator_servo")
+      !DEC$ IF .NOT. DEFINED(__LINUX__)
       use write_version_mod
+      !DEC$ END IF
       implicit none
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo'::init_generator_servo
@@ -21,8 +24,12 @@ module generator_servo_mod
       !
       ! Output array2 contains nothing
       !
+      !DEC$ IF .NOT. DEFINED(__LINUX__)
       call write_textversion
       write(6, *) 'Gen. torque Servo ' //trim(adjustl(TextVersion))// ' loaded...'
+      !DEC$ ELSE 
+      write(6, *) 'Gen. torque Servo ' //trim(adjustl(vertext32))// ' loaded...'
+      !DEC$ END IF
       ! Save parameters
       lowpass2ordergen%f0 = array1(1)*2.0_mk*pi
       lowpass2ordergen%zeta = array1(2)
@@ -41,7 +48,7 @@ module generator_servo_mod
       array2 = 0.0_mk
    end subroutine init_generator_servo
 !**************************************************************************************************
-   subroutine init_generator_servo_var_eta(array1,array2)
+   subroutine init_generator_servo_var_eta(array1,array2) bind(c,name="init_generator_servo_var_eta")
       implicit none
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo_var_eta'::init_generator_servo_var_eta
@@ -107,7 +114,7 @@ module generator_servo_mod
       return
    end subroutine init_generator_servo_var_eta
 !**************************************************************************************************
-   subroutine update_generator_servo(array1, array2)
+   subroutine update_generator_servo(array1, array2) bind(c,name="update_generator_servo")
       implicit none
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_generator_servo'::update_generator_servo

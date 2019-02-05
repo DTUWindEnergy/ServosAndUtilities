@@ -1,6 +1,8 @@
-  subroutine init_servo_with_limits(array1,array2)
+  subroutine init_servo_with_limits(array1,array2) bind(c,name="init_servo_with_limits")
   use servo_with_limits_data
+  !DEC$ IF .NOT. DEFINED(__LINUX__)
   use write_version_mod
+  !DEC$ END IF
   implicit none
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_servo_with_limits'::init_servo_with_limits
@@ -21,8 +23,10 @@
 !
 ! Output array2 contains nothing
 !
+  !DEC$ IF .NOT. DEFINED(__LINUX__)
   call write_textversion
   write(6,*) 'Pitch Servo ' //trim(adjustl(TextVersion))// ' loaded...'
+  !DEC$ END IF
 ! Save parameters
   nblades  =int(array1(1))
   omega0   =array1(2)*2.d0*pi
@@ -49,7 +53,7 @@
   return
   end subroutine init_servo_with_limits
 !***********************************************************************
-  subroutine update_servo_with_limits(array1,array2)
+  subroutine update_servo_with_limits(array1,array2) bind(c,name="update_servo_with_limits")
   use servo_with_limits_data
 !  use imsl
   implicit none

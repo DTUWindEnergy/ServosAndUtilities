@@ -13,10 +13,12 @@ module flap_servo_mod
    integer :: stepno = 0
    contains
 !**************************************************************************************************
-   subroutine init_flap_servo(array1, array2)
+   subroutine init_flap_servo(array1, array2) bind(c,name="init_flap_servo")
       ! Initialize Cyclic Flap Controller
       implicit none
+      !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_flap_servo'::init_flap_servo
+      !DEC$ END IF
       real(mk) array1(3), array2(1)
       ! Input parameters
       !   1: constant   1  ; Low-pass filter time constant [s]
@@ -36,9 +38,11 @@ module flap_servo_mod
       return
    end subroutine init_flap_servo
 !**************************************************************************************************
-   subroutine update_flap_servo(array1, array2)
+   subroutine update_flap_servo(array1, array2) bind(c,name="update_flap_servo")
       implicit none
+      !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_flap_servo'::update_flap_servo
+      !DEC$ END IF
       real(mk) array1(4), array2(3)
       ! Input array1 must contains
       !
