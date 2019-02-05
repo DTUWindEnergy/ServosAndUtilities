@@ -16,13 +16,24 @@ The libraries so far included are:
 
 The documentation will come as soon as possible.
 
-## Compilation
+## Compiling on Windows (as a DLL)
 
-At the moment compilation is supported only with Visual Studio. Make files are on the way.
+Use the Visual Studio project included in this repository.
+
+## Compiling on Unix (as a shared object)
+
+In case that another compiler rather than the default one wants to be used, edit the file /src/config.mk by modifying the line below:
+
+```>> FC=mpif90```
+
+With a suitable alternative (e.g. ifort). Once the compiler is defined, the different shared objects can be 
+compiled just by typing in the /src folder the following command through a Unix terminal:
+
+```>> make```
 
 ## Dependencies
 
-The project depends on the [Basic DTU Wind Energy controller](https://github.com/DTUWindEnergy/BasicDTUController) because a file is shared between the prjects. The Visual Studio projects support the dependencies at the condition that the ServoAndUtilities and the BasicDTUController repositories are located in the same folder.
+The project depends on the [Basic DTU Wind Energy controller](https://github.com/DTUWindEnergy/BasicDTUController) because a file is shared between the projects. The Visual Studio projects support the dependencies at the condition that the ServoAndUtilities and the BasicDTUController repositories are located in the same folder.
 
 ## License
 
