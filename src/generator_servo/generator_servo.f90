@@ -4,9 +4,7 @@ module generator_servo_mod
    contains
 !**************************************************************************************************
    subroutine init_generator_servo(array1,array2) bind(c,name="init_generator_servo")
-      !DEC$ IF .NOT. DEFINED(__LINUX__)
       use write_version_mod
-      !DEC$ END IF
       implicit none
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_generator_servo'::init_generator_servo

@@ -1,8 +1,6 @@
   subroutine init_mech_brake(array1,array2) bind(c,name="init_mech_brake")
   use mech_brake_fcns
-  !DEC$ IF .NOT. DEFINED(__LINUX__)
   use write_version_mod
-  !DEC$ END IF
   implicit none
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_mech_brake'::init_mech_brake

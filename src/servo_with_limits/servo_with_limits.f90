@@ -1,8 +1,6 @@
   subroutine init_servo_with_limits(array1,array2) bind(c,name="init_servo_with_limits")
   use servo_with_limits_data
-  !DEC$ IF .NOT. DEFINED(__LINUX__)
   use write_version_mod
-  !DEC$ END IF
   implicit none
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_servo_with_limits'::init_servo_with_limits
