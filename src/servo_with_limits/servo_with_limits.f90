@@ -1,11 +1,10 @@
   subroutine init_servo_with_limits(array1,array2) bind(c,name="init_servo_with_limits")
   use servo_with_limits_data
-  use write_version_mod
   implicit none
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'init_servo_with_limits'::init_servo_with_limits
 !DEC$ END IF
-  real*8 array1(100),array2(1)
+  real*8 array1(10),array2(1)
 ! Input array1 must contain
 !
 !    1: Number of blades [-]
@@ -35,12 +34,7 @@
   theta_max=array1(7)*pi/180.d0
   time_runaway=array1(8)
   time_stuck=array1(9)
-  if (abs(array1(10)).lt.90.d0) then 
-    stuck_type=0
-    stuck_angle=array1(10)*pi/180.d0
-  else
-    stuck_type=1
-  endif
+  stuck_angle=array1(10)*pi/180.d0
 ! Set initial conditions 
   ynew(1,1:nblades)=0.d0
   ynew(2,1:nblades)=0.d0
@@ -58,7 +52,7 @@
 !DEC$ IF .NOT. DEFINED(__LINUX__)
 !DEC$ ATTRIBUTES DLLEXPORT, C, ALIAS:'update_servo_with_limits'::update_servo_with_limits
 !DEC$ END IF
-  real*8 array1(100),array2(100)
+  real*8 array1(5),array2(9)
 ! Input array1 must contain
 !
 !    1: Time                                  [s]
@@ -83,7 +77,7 @@
 !  integer*4 i,j,ido
   integer*4 i,j
   !real*8 tol,param(50),y(2),t,tend,timestep
-  real*8 tol,y(2),t,tend
+  real*8 tol,y(2),t,tend,timestep
   !parameter(tol=1.d-5)
   real*8 theta
   real*8 work(15),relerr,abserr
@@ -94,54 +88,51 @@
   relerr=1.d-6
   iflag=1
 ! Check if the time has changed
-  if (array1(1)-oldtime.gt.0.d0) then
-    timestep=array1(1)-oldtime
+  timestep=array1(1)-oldtime
+  if (timestep.gt.0.d0) then
+    stepno=stepno+1
+    ! Handle inputs from other DLLs
+    if (stepno.eq.1) array1(5) = 0.d0
     oldtime=array1(1)
     yold=ynew
-    stepno=stepno+1
-  endif
-  ! Handle inputs from other DLLs
-  if (stepno.eq.1) array1(5) = 0.d0
-! Loop for all blades
-  do i=1,nblades
-!   Initial conditions for pitch angle and velocity
-    t=0.d0
-    y(1:2)=yold(1:2,i)
-!   Actual and reference position and velocity of pitch angle
-    theta_ref=array1(i+1)
-!   Compute pitch angle and velocity at next step 
-    tend=timestep
-    if ((array1(1).gt.time_stuck).and.(time_stuck.gt.0.d0).and.(array1(5).lt.1.d0).and.(i.eq.1)) then
-      if (stuck_type.eq.1) then
-        stuck_angle=yold(1,1)
+!   Loop for all blades
+    do i=1,nblades
+!     Initial conditions for pitch angle and velocity
+      t=0.d0
+      y(1:2)=yold(1:2,i)
+!     Actual and reference position and velocity of pitch angle
+      theta_ref=array1(i+1)
+!     Compute pitch angle and velocity at next step 
+      tend=timestep
+      if ((array1(1).gt.time_stuck).and.(time_stuck.gt.0.d0).and.(array1(5).lt.1.d0).and.(i.eq.1)) then
+        y(1)=stuck_angle
+        y(2)=0.d0
+      elseif ((array1(1).gt.time_runaway).and.(time_runaway.gt.0.d0).and.(array1(5).lt.1.d0)) then
+        y(1)=y(1)+y(2)*timestep
+        y(2)=max(-vmax,y(2)-amax)
+      elseif (array1(5).gt.0.d0) then
+        y(1)=y(1)+y(2)*timestep
+        y(2)=min(vmax,y(2)+amax)
+      else
+        call rkf45(ode,2,y,t,tend,relerr,abserr,iflag,work,iwork)
       endif
-      y(1)=stuck_angle
-      y(2)=0.d0
-    elseif ((array1(1).gt.time_runaway).and.(time_runaway.gt.0.d0).and.(array1(5).lt.1.d0)) then
-      y(1)=y(1)+y(2)*timestep
-      y(2)=max(-vmax,y(2)-amax)
-    elseif (array1(5).gt.0.d0) then
-      y(1)=y(1)+y(2)*timestep
-      y(2)=min(vmax,y(2)+amax)
-    else
-      call rkf45(ode,2,y,t,tend,relerr,abserr,iflag,work,iwork)
-    endif
-!   Apply hard limits on angles
-    if (y(1).lt.theta_min) then
-      y(1)=theta_min
-      y(2)=0.d0
-    endif
-    if (y(1).gt.theta_max) then
-      y(1)=theta_max
-      y(2)=0.d0
-    endif
-!   Save results
-    ynew(1:2,i)=y(1:2)
-!   Fill output array2
-    oldarray2(i)=y(1)
-    oldarray2(nblades+i)=y(2)
-    oldarray2(2*nblades+i)=(y(2)-yold(2,i))/timestep
-  enddo
+!     Apply hard limits on angles
+      if (y(1).lt.theta_min) then
+        y(1)=theta_min
+        y(2)=0.d0
+      endif
+      if (y(1).gt.theta_max) then
+        y(1)=theta_max
+        y(2)=0.d0
+      endif
+!     Save results
+      ynew(1:2,i)=y(1:2)
+!     Fill output array2
+      oldarray2(i)=y(1)
+      oldarray2(nblades+i)=y(2)
+      oldarray2(2*nblades+i)=(y(2)-yold(2,i))/timestep
+    enddo
+  endif
 ! Insert output
   array2(1:3*nblades)=oldarray2(1:3*nblades)
   return
