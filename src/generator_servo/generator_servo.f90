@@ -25,8 +25,6 @@ module generator_servo_mod
       !DEC$ IF .NOT. DEFINED(__LINUX__)
       call write_textversion
       write(6, *) 'Gen. torque Servo ' //trim(adjustl(TextVersion))// ' loaded...'
-      !DEC$ ELSE 
-      write(6, *) 'Gen. torque Servo ' //trim(adjustl(vertext32))// ' loaded...'
       !DEC$ END IF
       ! Save parameters
       lowpass2ordergen%f0 = array1(1)*2.0_mk*pi

@@ -24,8 +24,6 @@
   !DEC$ IF .NOT. DEFINED(__LINUX__)
   call write_textversion
   write(6,*) 'Pitch Servo ' //trim(adjustl(TextVersion))// ' loaded...'
-  !DEC$ ELSE 
-  write(6,*) 'Pitch Servo ' //trim(adjustl(vertext32))// ' loaded...'
   !DEC$ END IF
 ! Save parameters
   nblades  =int(array1(1))
