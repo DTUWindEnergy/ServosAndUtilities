@@ -33,7 +33,7 @@ compiled just by typing in the /src folder the following command through a Unix 
 
 ## Dependencies
 
-The project depends on the [Basic DTU Wind Energy controller](https://github.com/DTUWindEnergy/BasicDTUController) because a file is shared between the projects. The Visual Studio projects support the dependencies at the condition that the ServoAndUtilities and the BasicDTUController repositories are located in the same folder.
+The project depends on the [Basic DTU Wind Energy controller](https://github.com/DTUWindEnergy/BasicDTUController) because a file is shared between the projects. Both the Visual Studio projects and the Unix Makefile do support these dependencies, at the condition that the ServoAndUtilities and the BasicDTUController repositories are located in the same folder. In addition, the UNIX makefile assume that, before its execution, the BasicDTUController has been already compiled with a compatible compiler. 
 
 ## License
 
